@@ -9,6 +9,7 @@ import {
 import hotelRouter from './hotel.js';
 import restaurantRouter from './restaurant.js';
 import activityRouter from './activity.js';
+import auth from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -21,11 +22,11 @@ router.use('/:destinationId/activities', activityRouter);
 router.get('/', getAllDestinations);
 // GET a single destination by ID
 router.get('/:id', getDestinationById);
-// POST create a new destination
-router.post('/', createDestination);
-// PUT update a destination
-router.put('/:id', updateDestination);
-// DELETE a destination
-router.delete('/:id', deleteDestination);
+// POST create a new destination (protected)
+router.post('/', auth, createDestination);
+// PUT update a destination (protected)
+router.put('/:id', auth, updateDestination);
+// DELETE a destination (protected)
+router.delete('/:id', auth, deleteDestination);
 
 export default router; 

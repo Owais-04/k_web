@@ -6,6 +6,7 @@ import {
   updateRestaurant,
   deleteRestaurant
 } from '../controllers/restaurant.controller.js';
+import auth from '../middleware/auth.js';
 
 const router = express.Router({ mergeParams: true });
 
@@ -13,11 +14,11 @@ const router = express.Router({ mergeParams: true });
 router.get('/', getRestaurants);
 // GET a single restaurant by ID
 router.get('/:restaurantId', getRestaurantById);
-// POST create a new restaurant
-router.post('/', createRestaurant);
-// PUT update a restaurant
-router.put('/:restaurantId', updateRestaurant);
-// DELETE a restaurant
-router.delete('/:restaurantId', deleteRestaurant);
+// POST create a new restaurant (protected)
+router.post('/', auth, createRestaurant);
+// PUT update a restaurant (protected)
+router.put('/:restaurantId', auth, updateRestaurant);
+// DELETE a restaurant (protected)
+router.delete('/:restaurantId', auth, deleteRestaurant);
 
 export default router; 

@@ -6,6 +6,7 @@ import {
   updateHotel,
   deleteHotel
 } from '../controllers/hotel.controller.js';
+import auth from '../middleware/auth.js';
 
 const router = express.Router({ mergeParams: true });
 
@@ -13,11 +14,11 @@ const router = express.Router({ mergeParams: true });
 router.get('/', getHotels);
 // GET a single hotel by ID
 router.get('/:hotelId', getHotelById);
-// POST create a new hotel
-router.post('/', createHotel);
-// PUT update a hotel
-router.put('/:hotelId', updateHotel);
-// DELETE a hotel
-router.delete('/:hotelId', deleteHotel);
+// POST create a new hotel (protected)
+router.post('/', auth, createHotel);
+// PUT update a hotel (protected)
+router.put('/:hotelId', auth, updateHotel);
+// DELETE a hotel (protected)
+router.delete('/:hotelId', auth, deleteHotel);
 
 export default router; 

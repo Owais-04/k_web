@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import connectDB from './config/db.js';
 import destinationRouter from './routes/destination.js';
+import authRouter from './routes/auth.js';
 
 dotenv.config();
 const app = express();
@@ -11,7 +12,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Register routes
+// Register auth routes
+app.use('/api/auth', authRouter);
+// Register destination routes
 app.use('/api/destinations', destinationRouter);
 
 // Connect to MongoDB before starting the server

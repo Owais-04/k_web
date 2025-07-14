@@ -30,3 +30,6 @@ connectDB().then(() => {
 app.get('/', (req, res) => {
     res.send('API is running');
 });
+app.get('/api/status', (req, res) => {
+    res.json({ status: "OK" });
+});
